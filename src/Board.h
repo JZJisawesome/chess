@@ -1,7 +1,4 @@
-#ifndef BOARD_H
-#define BOARD_H
-
-/** MIT License
+/* MIT License
  *
  * Copyright (c) 2019 John Jekel
  *
@@ -22,7 +19,12 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- */
+*/
+
+#ifndef BOARD_H
+#define BOARD_H
+
+
 #include <array>
 #include <memory>
 
@@ -34,34 +36,32 @@ class Board
         {
             none, pawn, knight, rook, bishop, queen, king
         };
-
         typedef std::pair<PieceType, bool> Piece;//bool is if pawn is white
 
-        typedef std::array<std::array<Piece, 8>, 8> rawBoard_t;
 
-        Board();
-        virtual ~Board();
+        typedef std::array<Piece, 8> boardRow_t;
+        typedef std::array<boardRow_t, 8> boardArray_t;//todo change to pointer system to save stack space
 
-        rawBoard_t getBoard();
-
-    private:
-
-        rawBoard_t board
+        std::unique_ptr<boardArray_t> boardArray
         {
-
+            new boardArray_t
             {
-                {Piece(PieceType::rook, false), Piece(PieceType::knight, false), Piece(PieceType::bishop, false), Piece(PieceType::queen, false), Piece(PieceType::king, false), Piece(PieceType::bishop, false), Piece(PieceType::knight, false), Piece(PieceType::rook, false)},
-                {Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false)},
-                {Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true)},
-                {Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true)},
-                {Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true)},
-                {Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true)},
-                {Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true)},
-                {Piece(PieceType::rook, true), Piece(PieceType::knight, true), Piece(PieceType::bishop, true), Piece(PieceType::queen, true), Piece(PieceType::king, true), Piece(PieceType::bishop, true), Piece(PieceType::knight, true), Piece(PieceType::rook, true)}
+                {
+                    {Piece(PieceType::rook, false), Piece(PieceType::knight, false), Piece(PieceType::bishop, false), Piece(PieceType::queen, false), Piece(PieceType::king, false), Piece(PieceType::bishop, false), Piece(PieceType::knight, false), Piece(PieceType::rook, false)},
+                    {Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false), Piece(PieceType::pawn, false)},
+                    {Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true)},
+                    {Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true)},
+                    {Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true)},
+                    {Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true), Piece(PieceType::none, true)},
+                    {Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true), Piece(PieceType::pawn, true)},
+                    {Piece(PieceType::rook, true), Piece(PieceType::knight, true), Piece(PieceType::bishop, true), Piece(PieceType::queen, true), Piece(PieceType::king, true), Piece(PieceType::bishop, true), Piece(PieceType::knight, true), Piece(PieceType::rook, true)}
+                }
             }
         };
 
         bool whiteTurn = true;
+
+        boardRow_t operator[] (std::size_t yVal);
 };
 
 #endif //BOARD_H

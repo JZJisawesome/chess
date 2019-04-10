@@ -1,4 +1,4 @@
-/** MIT License
+/* MIT License
  *
  * Copyright (c) 2019 John Jekel
  *
@@ -19,73 +19,19 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- */
+*/
+
 #include <iostream>
 
 #include "Board.h"
-
-void testPrintBoard(Board::rawBoard_t board)
-{
-
-    for (int i = 0; i < 8; ++i)
-    {
-        for (int j = 0; j < 8; ++j)
-        {
-            char piece;
-
-            switch (board[i][j].first)
-            {
-                case Board::PieceType::bishop:
-                {
-                    piece = 'b';
-                    break;
-                }
-                case Board::PieceType::king:
-                {
-                    piece = 'K';
-                    break;
-                }
-                case Board::PieceType::knight:
-                {
-                    piece = 'k';
-                    break;
-                }
-                case Board::PieceType::pawn:
-                {
-                    piece = 'p';
-                    break;
-                }
-                case Board::PieceType::queen:
-                {
-                    piece = 'q';
-                    break;
-                }
-                case Board::PieceType::rook:
-                {
-                    piece = 'r';
-                    break;
-                }
-                case Board::PieceType::none:
-                default:
-                {
-                    piece = ' ';
-                    break;
-                }
-
-            }
-
-            std::cout << piece;
-        }
-
-        std::cout << std::endl;
-    }
-    std::cout << sizeof(Board::PieceType);
-}
+#include "BoardHelper.h"
 
 int main()
 {
     Board board;
 
-    testPrintBoard(board.getBoard());
+    std::cout << "chess" << std::endl << std::endl;
+
+    BoardHelper::printBoard(board);
     return 0;
 }

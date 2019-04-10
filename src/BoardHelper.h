@@ -21,10 +21,13 @@
  * SOFTWARE.
 */
 
+#include <iostream>
+
 #include "Board.h"
 
-
-Board::boardRow_t Board::operator[] (std::size_t yVal)
+namespace BoardHelper
 {
-    return (*boardArray)[yVal];//derefrence and return smaller row of board to be modified; smaller object to return from function
+    //bool validMove(Board board, int y, int x, int y, int x)
+
+    void printBoard(Board & board);
 }
